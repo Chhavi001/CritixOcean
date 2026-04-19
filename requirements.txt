@@ -1,0 +1,39 @@
+# Core LLM + LangChain ecosystem
+langchain
+langchain-core
+langchain-community
+langchain-google-genai
+
+# LCEL / Runnable support
+langchainhub
+
+# Tavily Search Tool
+tavily-python
+
+# Web scraping
+beautifulsoup4
+requests
+lxml
+
+# HTTP/async stack used by model and tools
+httpx
+aiohttp
+
+# Environment variables
+python-dotenv
+
+# Optional utility dependencies
+pydantic
+pandas
+packaging<25
+rich
+tiktoken
+tenacity
+orjson
+
+# Optional app / notebook dependencies
+streamlit
+fastapi
+uvicorn
+ipython
+jupyter
