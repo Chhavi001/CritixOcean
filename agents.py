@@ -1,5 +1,5 @@
 from langchain.agents import create_agent
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tools import web_search, scrape_url
@@ -22,27 +22,26 @@ def _get_required_env(var_name: str) -> str:
   return value
 
 
-def _get_google_api_key() -> str:
-  """Load a Google AI Studio API key from the preferred env var names."""
-  key = os.getenv("GOOGLE_API_KEY", "").strip()
-  if not key:
-    key = os.getenv("OPENAI_API_KEY", "").strip()
+def _get_openrouter_api_key() -> str:
+  """Load the OpenRouter API key from env."""
+  key = os.getenv("OPENROUTER_API_KEY", "").strip()
   if not key:
     raise RuntimeError(
-      "Missing required environment variable: GOOGLE_API_KEY. "
-      "Set GOOGLE_API_KEY in your .env file using a Google AI Studio key."
+      "Missing required environment variable: OPENROUTER_API_KEY. "
+      "Add it to your .env file and rerun the script."
     )
   return key
 
 
-google_api_key = _get_google_api_key()
-gemini_model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+openrouter_api_key = _get_openrouter_api_key()
+model_name = os.getenv("MODEL_NAME", "google/gemini-2.5-flash").strip()
 
-#model setup
-llm=ChatGoogleGenerativeAI(
-  model=gemini_model,
+#model setup — using OpenRouter (OpenAI-compatible API)
+llm = ChatOpenAI(
+  model=model_name,
   temperature=0,
-  google_api_key=google_api_key,
+  openai_api_key=openrouter_api_key,
+  openai_api_base="https://openrouter.ai/api/v1",
 )
 
 #first agent
