@@ -309,7 +309,7 @@ print(result["feedback"])      # Critic's feedback
 
 ---
 
-## 📸 **Screenshots**
+
 
 ### 🎨 **Streamlit Interface**
 *Clean, modern UI for submitting queries and viewing results*
